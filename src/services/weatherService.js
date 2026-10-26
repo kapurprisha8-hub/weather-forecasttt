@@ -135,6 +135,22 @@ export const fetchWeatherData = async (latitude, longitude, timezone = 'auto') =
 /**
  * Default preset cities for quick chips selection
  */
+/**
+ * Returns a theme name string based on the WMO weather code.
+ * Used to change the UI background/colors dynamically.
+ * Possible values: 'sunny' | 'cloudy' | 'rainy' | 'stormy' | 'snowy' | 'foggy' | 'windy' | 'default'
+ */
+export const getWeatherTheme = (code, isDay = 1) => {
+  if (code === 0 || code === 1) return isDay ? 'sunny' : 'night';
+  if (code === 2 || code === 3) return 'cloudy';
+  if (code === 45 || code === 48) return 'foggy';
+  if ((code >= 51 && code <= 67) || (code >= 80 && code <= 82)) return 'rainy';
+  if (code >= 71 && code <= 77) return 'snowy';
+  if (code >= 85 && code <= 86) return 'snowy';
+  if (code >= 95 && code <= 99) return 'stormy';
+  return 'default';
+};
+
 export const POPULAR_CITIES = [
   { name: 'London', country: 'United Kingdom', latitude: 51.5085, longitude: -0.1257, timezone: 'Europe/London' },
   { name: 'New York', country: 'United States', latitude: 40.7143, longitude: -74.006, timezone: 'America/New_York' },

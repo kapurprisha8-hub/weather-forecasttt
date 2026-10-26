@@ -28,6 +28,17 @@ import {
   MapPin,
   Sparkles,
   HelpCircle,
+  Umbrella,
+  ShieldAlert,
+  AlertTriangle,
+  User,
+  Lock,
+  Mail,
+  LogIn,
+  LogOut,
+  Shirt,
+  Glasses,
+  CheckCircle2,
 } from 'lucide-react';
 
 const iconMap = {
@@ -58,6 +69,18 @@ const iconMap = {
   Users,
   MapPin,
   Sparkles,
+  HelpCircle,
+  Umbrella,
+  ShieldAlert,
+  AlertTriangle,
+  User,
+  Lock,
+  Mail,
+  LogIn,
+  LogOut,
+  Shirt,
+  Glasses,
+  CheckCircle2,
 };
 
 export default function WeatherIcon({ name, size = 24, color = 'currentColor', className = '' }) {

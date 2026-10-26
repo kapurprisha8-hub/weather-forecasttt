@@ -2,15 +2,18 @@ import React from 'react';
 import WeatherIcon from './WeatherIcon';
 
 /**
- * Navbar Component (Team Member 1 Contribution)
- * Manages App header, temperature unit switcher (°C / °F), geolocation trigger, and team modal toggle.
+ * Navbar Component
+ * App header with temperature unit switcher (°C / °F), geolocation trigger,
+ * and user authentication (Log In / Sign Up / Profile status).
  */
 export default function Navbar({
   unit,
   onToggleUnit,
   onUseCurrentLocation,
   isLocating,
-  onOpenTeamModal,
+  currentUser,
+  onOpenAuthModal,
+  onLogout,
 }) {
   return (
     <header className="navbar-container">
@@ -21,9 +24,8 @@ export default function Navbar({
         <div>
           <div className="brand-title-wrap">
             <h1 className="brand-title">SkyCast</h1>
-            <span className="brand-badge">Team Project</span>
           </div>
-          <p className="brand-subtitle">5-Day Weather Forecast & Analytics</p>
+          <p className="brand-subtitle">5-Day Weather Forecast & Smart Recommendations</p>
         </div>
       </div>
 
@@ -62,16 +64,38 @@ export default function Navbar({
           </button>
         </div>
 
-        {/* Team Project Info Button */}
-        <button
-          type="button"
-          className="btn-glass btn-team"
-          onClick={onOpenTeamModal}
-          title="View Project Team Members & Roles"
-        >
-          <WeatherIcon name="Users" size={16} color="#38bdf8" />
-          <span className="btn-label">Team</span>
-        </button>
+        {/* Authentication Button / User Profile Pill */}
+        {currentUser ? (
+          <div className="user-profile-pill">
+            <div className="user-avatar">
+              <WeatherIcon name="User" size={15} color="#38bdf8" />
+            </div>
+            <div className="user-info">
+              <span className="user-name">{currentUser.name}</span>
+              {currentUser.location?.name && (
+                <span className="user-home-city">{currentUser.location.name}</span>
+              )}
+            </div>
+            <button
+              type="button"
+              className="btn-logout"
+              onClick={onLogout}
+              title="Sign Out"
+            >
+              <WeatherIcon name="LogOut" size={14} />
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="btn-glass btn-auth"
+            onClick={onOpenAuthModal}
+            title="Log in or create an account"
+          >
+            <WeatherIcon name="User" size={16} className="text-cyan" />
+            <span className="btn-label">Sign In / Sign Up</span>
+          </button>
+        )}
       </div>
     </header>
   );
